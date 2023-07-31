@@ -192,23 +192,76 @@
 
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
 // Массив размером 2 x 2 x 2
-Random number = new Random();
+// Random number = new Random();
 
-  int M = 2, N = 2, K = 2;
+//   int m = 2, n = 2, k = 2;
 
-  int[,,] array3D = new int[M, N, K];
+//   int[,,] array3D = new int[m, n, k];
 
-  for (int i = 0; i < M; i++)
-  {
-    for (int j = 0; j < N; j++)
-    {
-      for (int l = 0; l < K; l++)
-      {
-        array3D[i, j, l] = number.Next(10, 99);
-        Console.Write($"{array3D[i, j, l]}({i},{j},{l}) ");
-      }
-      Console.WriteLine();
-    }
-  } 
+//   for (int i = 0; i < m; i++)
+//   {
+//     for (int j = 0; j < n; j++)
+//     {
+//       for (int l = 0; l < k; l++)
+//       {
+//         array3D[i, j, l] = number.Next(10, 99);
+//         Console.Write($"{array3D[i, j, l]}({i},{j},{l}) ");
+//       }
+//       Console.WriteLine();
+//     }
+//   } 
 
 // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+Console.Write("Введите количество строк: ");
+int rowsUser = Convert.ToInt32(Console.ReadLine());
+Console.Write("Введите количество cтолбцов: ");
+int columnsUser = Convert.ToInt32(Console.ReadLine());
+int[,] array2D = new int[rowsUser, columnsUser];
+
+int i = 0;
+int j = -1;
+
+int row = 0;
+int col = 1; 
+
+int t = 1;
+while (t <= rowsUser * columnsUser)
+{
+    if (
+          (i + row >= 0 & i + row < rowsUser) &&
+          (j + col >= 0 & j + col < columnsUser) &&
+          array2D[i + row, j + col] == 0
+        )
+    {
+        i += row;
+        j += col;
+        array2D[i, j] = t++;
+    }
+    else if (col == 1)
+    {
+        row = 1;
+        col = 0;
+    }
+    else if (row == 1)
+    {
+        col = -1;
+        row = 0;
+    }
+    else if (col == -1)
+    {
+        col = 0;
+        row = -1;
+    }
+    else if (row == -1)
+    {
+        row = 0;
+        col = 1;
+    }
+}
+
+for (i = 0; i < rowsUser; i++)
+{
+    for (j = 0; j < columnsUser; j++)
+        Console.Write("{0,4}", array2D[i, j]);
+    Console.WriteLine();
+}
